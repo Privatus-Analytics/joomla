@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<extension type="plugin" group="system" method="upgrade">
+	<name>PLG_SYSTEM_PRIVATUSANALYTICS</name>
+	<author>Two Phase LLC</author>
+	<creationDate>2026-10</creationDate>
+	<copyright>(C) 2026 Two Phase LLC</copyright>
+	<license>GNU General Public License version 2 or later</license>
+	<authorEmail>james@privatusanalytics.com</authorEmail>
+	<authorUrl>https://privatusanalytics.com</authorUrl>
+	<version>1.0.0</version>
+	<description>PLG_SYSTEM_PRIVATUSANALYTICS_XML_DESCRIPTION</description>
+	<namespace path="src">TwoPhase\Plugin\System\PrivatusAnalytics</namespace>
+	<files>
+		<folder plugin="privatusanalytics">services</folder>
+		<folder>src</folder>
+	</files>
+	<languages folder="language">
+		<language tag="en-GB">en-GB/plg_system_privatusanalytics.ini</language>
+		<language tag="en-GB">en-GB/plg_system_privatusanalytics.sys.ini</language>
+	</languages>
+	<config>
+		<fields name="params">
+			<fieldset name="basic">
+				<field
+					name="site_id"
+					type="text"
+					label="PLG_SYSTEM_PRIVATUSANALYTICS_SITE_ID_LABEL"
+					description="PLG_SYSTEM_PRIVATUSANALYTICS_SITE_ID_DESC"
+					hint="pa_YOURSITEID"
+					filter="string"
+				/>
+				<field
+					name="script_host"
+					type="url"
+					label="PLG_SYSTEM_PRIVATUSANALYTICS_SCRIPT_HOST_LABEL"
+					description="PLG_SYSTEM_PRIVATUSANALYTICS_SCRIPT_HOST_DESC"
+					default="https://privatusstats.com"
+					filter="url"
+					validate="url"
+				/>
+				<field
+					name="modules"
+					type="checkboxes"
+					label="PLG_SYSTEM_PRIVATUSANALYTICS_MODULES_LABEL"
+					description="PLG_SYSTEM_PRIVATUSANALYTICS_MODULES_DESC"
+					default="engage,auto,vitals,clicks,ask"
+					multiple="true"
+				>
+					<option value="engage">PLG_SYSTEM_PRIVATUSANALYTICS_MODULE_ENGAGE</option>
+					<option value="auto">PLG_SYSTEM_PRIVATUSANALYTICS_MODULE_AUTO</option>
+					<option value="vitals">PLG_SYSTEM_PRIVATUSANALYTICS_MODULE_VITALS</option>
+					<option value="clicks">PLG_SYSTEM_PRIVATUSANALYTICS_MODULE_CLICKS</option>
+					<option value="ask">PLG_SYSTEM_PRIVATUSANALYTICS_MODULE_ASK</option>
+				</field>
+			</fieldset>
+			<fieldset name="tracking" label="PLG_SYSTEM_PRIVATUSANALYTICS_FIELDSET_TRACKING">
+				<field
+					name="exclude"
+					type="textarea"
+					label="PLG_SYSTEM_PRIVATUSANALYTICS_EXCLUDE_LABEL"
+					description="PLG_SYSTEM_PRIVATUSANALYTICS_EXCLUDE_DESC"
+					hint="/checkout/*, /thank-you"
+					rows="3"
+					filter="string"
+				/>
+				<field
+					name="domains"
+					type="text"
+					label="PLG_SYSTEM_PRIVATUSANALYTICS_DOMAINS_LABEL"
+					description="PLG_SYSTEM_PRIVATUSANALYTICS_DOMAINS_DESC"
+					hint="example.com,www.example.com"
+					filter="string"
+				/>
+				<field
+					name="spa"
+					type="list"
+					label="PLG_SYSTEM_PRIVATUSANALYTICS_SPA_LABEL"
+					description="PLG_SYSTEM_PRIVATUSANALYTICS_SPA_DESC"
+					default="auto"
+				>
+					<option value="auto">PLG_SYSTEM_PRIVATUSANALYTICS_SPA_AUTO</option>
+					<option value="history">PLG_SYSTEM_PRIVATUSANALYTICS_SPA_HISTORY</option>
+					<option value="hash">PLG_SYSTEM_PRIVATUSANALYTICS_SPA_HASH</option>
+					<option value="off">PLG_SYSTEM_PRIVATUSANALYTICS_SPA_OFF</option>
+				</field>
+				<field
+					name="manual"
+					type="radio"
+					label="PLG_SYSTEM_PRIVATUSANALYTICS_MANUAL_LABEL"
+					description="PLG_SYSTEM_PRIVATUSANALYTICS_MANUAL_DESC"
+					layout="joomla.form.field.radio.switcher"
+					default="0"
+					filter="integer"
+				>
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
+				</field>
+			</fieldset>
+			<fieldset name="users" label="PLG_SYSTEM_PRIVATUSANALYTICS_FIELDSET_USERS">
+				<field
+					name="skip_logged_in"
+					type="radio"
+					label="PLG_SYSTEM_PRIVATUSANALYTICS_SKIP_LOGGED_IN_LABEL"
+					description="PLG_SYSTEM_PRIVATUSANALYTICS_SKIP_LOGGED_IN_DESC"
+					layout="joomla.form.field.radio.switcher"
+					default="0"
+					filter="integer"
+				>
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
+				</field>
+				<field
+					name="skip_groups"
+					type="usergrouplist"
+					label="PLG_SYSTEM_PRIVATUSANALYTICS_SKIP_GROUPS_LABEL"
+					description="PLG_SYSTEM_PRIVATUSANALYTICS_SKIP_GROUPS_DESC"
+					multiple="true"
+					layout="joomla.form.field.list-fancy-select"
+				/>
+			</fieldset>
+		</fields>
+	</config>
+	<updateservers>
+		<server type="extension" priority="1" name="Privatus Analytics for Joomla">https://raw.githubusercontent.com/Privatus-Analytics/joomla/main/update.xml</server>
+	</updateservers>
+</extension>
