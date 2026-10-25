@@ -95,7 +95,7 @@ def check(name, ok, detail=""):
         failures += 1
 
 
-table = sql("select table_name from information_schema.tables where table_name like '%\\_extensions' limit 1")
+table = sql("select table_name from information_schema.tables where table_schema='joomla' and table_name regexp '^[^_]+_extensions$'")
 prefix = table[: -len("extensions")]
 
 # 1. Log in to the administrator.

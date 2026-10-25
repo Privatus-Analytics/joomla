@@ -46,7 +46,7 @@ docker exec "$NET-web" php /var/www/html/cli/joomla.php --version
 docker cp "$ZIP" "$NET-web:/tmp/plugin.zip"
 docker exec -u www-data "$NET-web" php /var/www/html/cli/joomla.php extension:install --path=/tmp/plugin.zip
 docker exec "$NET-db" mariadb -uroot -p"$DB_PASS" joomla -e \
-  "select extension_id,name,enabled from $(docker exec "$NET-db" mariadb -uroot -p"$DB_PASS" joomla -N -e "select table_name from information_schema.tables where table_name like '%\_extensions' limit 1") where element='privatusanalytics'"
+  "select extension_id,name,enabled from $(docker exec "$NET-db" mariadb -uroot -p"$DB_PASS" joomla -N -e "select table_name from information_schema.tables where table_schema='joomla' and table_name regexp '^[^_]+_extensions\$'") where element='privatusanalytics'"
 
 BASE="http://localhost:$PORT" ADMIN_USER="$ADMIN_USER" ADMIN_PASS="$ADMIN_PASS" \
   DB_CONTAINER="$NET-db" DB_PASS="$DB_PASS" python3 -I scripts/verify_joomla.py
